@@ -330,19 +330,6 @@ footer {
   height: 28px;
 }
 
-/* Typing animation */
-.typing-cursor {
-  display: inline-block;
-  margin-left: 4px;
-  animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
 @media (max-width: 600px) {
   .profile {
     grid-template-columns: 1fr;
@@ -372,7 +359,7 @@ footer {
 <main class="page">
 
   <header>
-    <h1 class="site-name">꒰‎ ᐢ‎ ‎ ᐢ‎ ꒱</h1>
+    <h1 class="site-name">꒰‎ᐢ⸝⸝⸝⸝⸝ᐢ꒱</h1>
     <div class="subtitle">
       welcome to my little corner of the internet ✧
     </div>
@@ -387,7 +374,7 @@ footer {
     <img class="avatar" src="mypfp.jpg" alt="my profile picture">
 
     <div class="profile-info">
-      <h2><span id="typing-text"></span><span class="typing-cursor">♡</span></h2>
+      <h2><span id="typing-text"></span></h2>
       <p>she / her</p>
       <p>31 may</p>
       <p>pure and fragile heart . . ♡</p>
@@ -595,16 +582,35 @@ document.addEventListener("keydown", function(event) {
   if (event.key === "Escape") hideMessage();
 });
 
-/* Typing animation */
+/* Repeating typing animation */
 const typingText = document.getElementById("typing-text");
 const typingMessage = "hai , welcome ♡";
 let typingIndex = 0;
+let deleting = false;
 
 function typeWelcome() {
-  if (typingIndex < typingMessage.length) {
-    typingText.textContent += typingMessage.charAt(typingIndex);
+  if (!deleting) {
+    typingText.textContent = typingMessage.slice(0, typingIndex + 1);
     typingIndex++;
+
+    if (typingIndex === typingMessage.length) {
+      deleting = true;
+      setTimeout(typeWelcome, 1200);
+      return;
+    }
+
     setTimeout(typeWelcome, 130);
+  } else {
+    typingText.textContent = typingMessage.slice(0, typingIndex - 1);
+    typingIndex--;
+
+    if (typingIndex === 0) {
+      deleting = false;
+      setTimeout(typeWelcome, 500);
+      return;
+    }
+
+    setTimeout(typeWelcome, 70);
   }
 }
 
@@ -624,7 +630,7 @@ function toggleMusic() {
         status.textContent = "音楽を楽しんでね ♡";
       })
       .catch(() => {
-        status.textContent = "couldn't play music, please try again ♡";
+        status.textContent = "couldn’t play music , please click again or check your connection ♡";
       });
   } else {
     music.pause();
@@ -635,3 +641,4 @@ function toggleMusic() {
 </script>
 </body>
 </html>
+
