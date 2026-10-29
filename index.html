@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>꒰‎ ᐢ‎ ‎ ᐢ‎ ꒱</title>
+<title>꒰‎ᐢ⸝⸝⸝⸝⸝ᐢ꒱</title>
 
 <style>
 :root {
@@ -330,6 +330,19 @@ footer {
   height: 28px;
 }
 
+/* Typing animation */
+.typing-cursor {
+  display: inline-block;
+  margin-left: 4px;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 @media (max-width: 600px) {
   .profile {
     grid-template-columns: 1fr;
@@ -364,7 +377,7 @@ footer {
       welcome to my little corner of the internet ✧
     </div>
     <p class="subtitle">
-      stay a little, look around, and have a lovely day ♡
+      stay a little , look around , and have a lovely day ୨୧
     </p>
   </header>
 
@@ -374,7 +387,7 @@ footer {
     <img class="avatar" src="mypfp.jpg" alt="my profile picture">
 
     <div class="profile-info">
-      <h2>hai , welcome ♡</h2>
+      <h2><span id="typing-text"></span><span class="typing-cursor">♡</span></h2>
       <p>she / her</p>
       <p>31 may</p>
       <p>pure and fragile heart . . ♡</p>
@@ -581,6 +594,21 @@ function outsideClose(event) {
 document.addEventListener("keydown", function(event) {
   if (event.key === "Escape") hideMessage();
 });
+
+/* Typing animation */
+const typingText = document.getElementById("typing-text");
+const typingMessage = "hai , welcome ♡";
+let typingIndex = 0;
+
+function typeWelcome() {
+  if (typingIndex < typingMessage.length) {
+    typingText.textContent += typingMessage.charAt(typingIndex);
+    typingIndex++;
+    setTimeout(typeWelcome, 130);
+  }
+}
+
+typeWelcome();
 
 /* MP3 music */
 const music = document.getElementById("background-music");
