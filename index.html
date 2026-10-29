@@ -1,0 +1,656 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>꒰‎ ᐢ‎ ‎ ᐢ‎ ꒱</title>
+
+<style>
+:root {
+  --pink: #ffe1f0;
+  --white: #ffffff;
+  --text: #8f7180;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, serif;
+  color: var(--text);
+  background: white;
+  background-image:
+    radial-gradient(circle at 10% 20%, #ffe1f0 0, transparent 24%),
+    radial-gradient(circle at 90% 80%, #fff0f7 0, transparent 28%);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.page {
+  width: min(900px, 92%);
+  margin: auto;
+  padding: 35px 0 25px;
+}
+
+header {
+  text-align: center;
+  padding: 24px 12px;
+  margin-bottom: 22px;
+  border: 1px solid var(--pink);
+  border-radius: 22px;
+  background: #ffffffd9;
+}
+
+.site-name {
+  font-size: clamp(28px, 6vw, 42px);
+  margin: 0 0 10px;
+  font-weight: normal;
+}
+
+.subtitle {
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 1.8;
+}
+
+.profile {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  border-radius: 22px;
+  border: 1px solid #f8cfe2;
+
+  /* Profile background image */
+  background-image:
+    linear-gradient(#ffe1f0a8, #ffe1f0a8),
+    url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.avatar {
+  position: relative;
+  z-index: 2;
+  width: 145px;
+  height: 145px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 5px solid white;
+  background: white;
+}
+
+.profile-info {
+  position: relative;
+  z-index: 2;
+}
+
+.profile h2 {
+  margin: 0 0 12px;
+  font-size: 25px;
+  font-weight: normal;
+}
+
+.profile p {
+  margin: 8px 0;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* Tiny glowing white sparkles */
+.snow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.snow span {
+  position: absolute;
+  top: -12px;
+  border-radius: 50%;
+  background: white;
+  box-shadow:
+    0 0 5px 2px white,
+    0 0 12px 4px #ffffffbf;
+  opacity: 0;
+  animation: softSnowfall linear infinite;
+}
+
+@keyframes softSnowfall {
+  0% {
+    transform: translate(0, -10px) scale(.5);
+    opacity: 0;
+  }
+  15% {
+    opacity: .95;
+  }
+  50% {
+    transform: translate(12px, 110px) scale(1);
+    opacity: .8;
+  }
+  85% {
+    opacity: .65;
+  }
+  100% {
+    transform: translate(-8px, 240px) scale(.4);
+    opacity: 0;
+  }
+}
+
+.music {
+  margin: 20px 0;
+  padding: 16px;
+  border: 1px solid var(--pink);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: white;
+}
+
+.heart-button {
+  border: none;
+  background: var(--pink);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 23px;
+  transition: transform .2s;
+}
+
+.heart-button:hover {
+  transform: scale(1.1);
+}
+
+#music-status {
+  font-size: 13px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 25px;
+  font-weight: normal;
+  margin: 32px 0 8px;
+}
+
+.section-note {
+  text-align: center;
+  font-size: 13px;
+  margin: 0 0 20px;
+}
+
+.interests {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.interest {
+  min-width: 0;
+  padding: 15px 10px;
+  border: 1px solid #f7d2e3;
+  border-radius: 18px;
+  background: white;
+  transition: transform .2s, background .2s;
+}
+
+.interest:hover {
+  transform: translateY(-3px);
+  background: #fff5fa;
+}
+
+.interest img {
+  display: block;
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+  margin: 0 auto 10px;
+}
+
+.interest p {
+  font-size: 13px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 30px 0;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--pink);
+  border: 1px solid #f7d2e3;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 13px;
+}
+
+.social img {
+  width: 23px;
+  height: 23px;
+  object-fit: contain;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0 5px;
+  font-size: 12px;
+}
+
+/* Popup messages */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #6e526477;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-box {
+  position: relative;
+  width: min(340px, 100%);
+  text-align: center;
+  padding: 28px 22px;
+  border: 2px solid var(--pink);
+  border-radius: 22px;
+  background: white;
+  box-shadow: 0 12px 40px #6e526422;
+  animation: popup .25s ease-out;
+}
+
+@keyframes popup {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-box img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.modal-box h3 {
+  font-size: 19px;
+  font-weight: normal;
+  margin: 0 0 12px;
+}
+
+.modal-box p {
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.close {
+  position: absolute;
+  right: 13px;
+  top: 10px;
+  background: var(--pink);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+}
+
+@media (max-width: 600px) {
+  .profile {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 14px;
+  }
+
+  .avatar {
+    margin: auto;
+    width: 125px;
+    height: 125px;
+  }
+
+  .interests {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page {
+    width: 92%;
+    padding-top: 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="page">
+
+  <header>
+    <h1 class="site-name">꒰‎ ᐢ‎ ‎ ᐢ‎ ꒱</h1>
+    <div class="subtitle">
+      welcome to my little corner of the internet ✧
+    </div>
+    <p class="subtitle">
+      stay a little, look around, and have a lovely day ♡
+    </p>
+  </header>
+
+  <section class="profile">
+    <div class="snow" id="snow" aria-hidden="true"></div>
+
+    <img class="avatar" src="mypfp.jpg" alt="my profile picture">
+
+    <div class="profile-info">
+      <h2>hai , welcome ♡</h2>
+      <p>she / her</p>
+      <p>31 may</p>
+      <p>pure and fragile heart . . ♡</p>
+    
+    </div>
+  </section>
+
+  <section class="music">
+    <button class="heart-button" id="music-button"
+      aria-label="Play music" onclick="toggleMusic()">♡</button>
+    <span id="music-status">click the heart to play music ♡</span>
+  </section>
+
+  <div id="youtube-player"
+    style="position:absolute;width:1px;height:1px;overflow:hidden;left:-9999px;">
+  </div>
+
+  <h2 class="section-title">my favourites ♡</h2>
+  <p class="section-note">click on a little charm to see a message ✧</p>
+
+  <section class="interests">
+    <button class="interest" onclick="showMessage(0)">
+      <img src="charms/heartbow.png" alt="">
+      <p>my boyfriend </p>
+    </button>
+
+    <button class="interest" onclick="showMessage(1)">
+      <img src="charms/bow.png" alt="">
+      <p>my bsf </p>
+    </button>
+
+    <button class="interest" onclick="showMessage(2)">
+      <img src="charms/bone.png" alt="">
+      <p>the bunnies friends group</p>
+    </button>
+
+    <button class="interest" onclick="showMessage(3)">
+      <img src="charms/collar.png" alt="">
+      <p>the collared pets friends group</p>
+    </button>
+
+    <button class="interest" onclick="showMessage(4)">
+      <img src="charms/bunny.png" alt="">
+      <p>bunnies</p>
+    </button>
+
+    <button class="interest" onclick="showMessage(5)">
+      <img src="charms/kitty.png" alt="">
+      <p>kitties</p>
+    </button>
+
+    <button class="interest" onclick="showMessage(6)">
+      <img src="charms/flower.png" alt="">
+      <p>plushies</p>
+    </button>
+
+    <button class="interest" onclick="showMessage(7)">
+      <img src="charms/pencil.png" alt="">
+      <p>animanga</p>
+    </button>
+
+    <button class="interest" onclick="showMessage(8)">
+      <img src="charms/mymelodyhead.png" alt="">
+      <p>sanrio</p>
+    </button>
+
+    <button class="interest" onclick="showMessage(9)">
+      <img src="charms/clip.png" alt="">
+      <p>kawaii / cute things</p>
+    </button>
+
+    <button class="interest" onclick="showMessage(10)">
+      <img src="charms/melodypurse.png" alt="">
+      <p>fashion</p>
+    </button>
+
+    <button class="interest" onclick="showMessage(11)">
+      <img src="charms/cupcake.png" alt="">
+      <p>sweets</p>
+    </button>
+  </section>
+
+  <nav class="socials">
+    <a class="social" href="https://www.roblox.com/"
+      target="_blank" rel="noopener">
+      <img src="charms/book.png" alt="">
+      roblox ♡
+    </a>
+
+    <a class="social" href="https://discord.com/app"
+      target="_blank" rel="noopener">
+      <img src="charms/book.png" alt="">
+      discord ♡
+    </a>
+  </nav>
+
+  <footer>made with ♡ by me</footer>
+</main>
+
+<div class="modal" id="interest-modal" onclick="outsideClose(event)">
+  <div class="modal-box">
+    <button class="close" onclick="hideMessage()" aria-label="Close">×</button>
+    <img id="modal-image" src="" alt="">
+    <h3 id="modal-title"></h3>
+    <p id="modal-message"></p>
+  </div>
+</div>
+
+<script>
+/* Falling sparkles */
+const snowContainer = document.getElementById("snow");
+
+for (let i = 0; i < 28; i++) {
+  const sparkle = document.createElement("span");
+  sparkle.style.left = Math.random() * 100 + "%";
+  sparkle.style.animationDuration = (6 + Math.random() * 7) + "s";
+  sparkle.style.animationDelay = (Math.random() * 12) + "s";
+
+  const size = 2 + Math.random() * 3;
+  sparkle.style.width = size + "px";
+  sparkle.style.height = size + "px";
+
+  snowContainer.appendChild(sparkle);
+}
+
+/* Favourite cards */
+const interests = [
+  {
+    title: "my boyfriend",
+    image: "charms/heartbow.png",
+    message: "my favourite person , always ♡ "
+  },
+  {
+    title: "my bsf",
+    image: "charms/bow.png",
+    message: "lisette , my dear precious angel ♡ "
+  },
+  {
+    title: "the bunnies friends group",
+    image: "charms/bone.png",
+    message: "a place full of love and memories ⁠♡ "
+  },
+  {
+    title: "the collared pets friends group",
+    image: "charms/collar.png",
+    message: "little corner with my favourite people ⁠♡ "
+  },
+  {
+    title: "bunnies ",
+    image: "charms/bunny.png",
+    message: "soft and delicated ⁠♡ "
+  },
+  {
+    title: "kitties ",
+    image: "charms/kitty.png",
+    message: "little baby paws ♡ "
+  },
+  {
+    title: "plushies ",
+    image: "charms/flower.png",
+    message: "my cute comfort collection ♡ "
+  },
+  {
+    title: "animanga ",
+    image: "charms/pencil.png",
+    message: "my little interest ♡ "
+  },
+  {
+    title: "sanrio ",
+    image: "charms/mymelodyhead.png",
+    message: "my favourites characters ♡ "
+  },
+  {
+    title: "kawaii / cute things ",
+    image: "charms/clip.png",
+    message: "little things that make me happy ⁠♡ "
+  },
+  {
+    title: "fashion ",
+    image: "charms/melodypurse.png",
+    message: "everyone has their own style i adore ♡ "
+  },
+  {
+    title: "sweets ",
+    image: "charms/cupcake.png",
+    message: "i enjoy little sweet dessert ⁠♡ "
+  }
+];
+
+function showMessage(index) {
+  const item = interests[index];
+  document.getElementById("modal-image").src = item.image;
+  document.getElementById("modal-title").textContent = item.title;
+  document.getElementById("modal-message").textContent = item.message;
+  document.getElementById("interest-modal").classList.add("show");
+}
+
+function hideMessage() {
+  document.getElementById("interest-modal").classList.remove("show");
+}
+
+function outsideClose(event) {
+  if (event.target.id === "interest-modal") hideMessage();
+}
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") hideMessage();
+});
+
+/* YouTube music */
+let player;
+let playerReady = false;
+let musicStarted = false;
+
+function loadYouTubeAPI() {
+  if (window.YT && window.YT.Player) {
+    createPlayer();
+    return;
+  }
+
+  if (!document.getElementById("youtube-api")) {
+    const tag = document.createElement("script");
+    tag.id = "youtube-api";
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+  }
+}
+
+function createPlayer() {
+  if (player) return;
+
+  player = new YT.Player("youtube-player", {
+    height: "1",
+    width: "1",
+    videoId: "qzSs6MJOkbM",
+    playerVars: {
+      autoplay: 0,
+      loop: 1,
+      playlist: "qzSs6MJOkbM"
+    },
+    events: {
+      onReady: function() {
+        playerReady = true;
+      }
+    }
+  });
+}
+
+window.onYouTubeIframeAPIReady = function() {
+  createPlayer();
+};
+
+loadYouTubeAPI();
+
+function toggleMusic() {
+  const button = document.getElementById("music-button");
+  const status = document.getElementById("music-status");
+
+  if (!playerReady || !player) {
+    status.textContent = "please wait a moment ♡";
+    loadYouTubeAPI();
+    return;
+  }
+
+  if (!musicStarted) {
+    player.playVideo();
+    musicStarted = true;
+    button.textContent = "♥";
+    status.textContent = "音楽を楽しんでね ♡";
+  } else {
+    player.pauseVideo();
+    musicStarted = false;
+    button.textContent = "♡";
+    status.textContent = "music paused ♡";
+  }
+}
+</script>
+</body>
+      </html>
