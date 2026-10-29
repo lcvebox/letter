@@ -630,8 +630,8 @@ function toggleMusic() {
         status.textContent = "音楽を楽しんでね ♡";
       })
       .catch(() => {
-        status.textContent = "couldn’t play music , please click again or check your connection ♡";
-      });
+  status.textContent = "";
+});
   } else {
     music.pause();
     button.textContent = "♡";
