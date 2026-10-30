@@ -197,7 +197,7 @@ header {
   object-fit: contain;
   vertical-align: middle;
   display: inline-block;
-  margin-left: 2px;
+  margin-left: -5px;
 }
 
 .section-note {
@@ -467,7 +467,7 @@ footer {
 
     <button class="interest" onclick="showMessage(11)">
       <img src="charms/cupcake.png" alt="">
-      <p>sweets</p>
+      <p>dessert</p>
     </button>
   </section>
 
@@ -682,7 +682,7 @@ function toggleMusic() {
   const status = document.getElementById("music-status");
 
   if (!playerReady || !player) {
-    status.textContent = "please wait a moment ♡";
+    status.textContent = "please wait a moment and click again ♡";
     loadYouTubeAPI();
     return;
   }
