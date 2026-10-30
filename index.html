@@ -187,7 +187,12 @@ header {
   margin: 32px 0 8px;
 }
 
-/* Small clickable letter icon */
+/* Clickable letter and pink pointing arrow */
+.letter-wrap {
+  position: relative;
+  display: inline-block;
+}
+
 .title-icon {
   width: 60px;
   height: 60px;
@@ -205,23 +210,23 @@ header {
   transform: scale(1.1);
 }
 
-/* Tiny rolling pink arrow */
-.letter-hint {
-  display: inline-block;
+.letter-arrow {
+  position: absolute;
+  top: -5px;
+  right: -8px;
   color: #ee9cbd;
-  font-size: 13px;
-  margin-left: -5px;
-  vertical-align: middle;
-  animation: rollingArrow 1.5s ease-in-out infinite;
+  font-size: 17px;
+  line-height: 1;
+  animation: arrowBounce 1s ease-in-out infinite;
   pointer-events: none;
 }
 
-@keyframes rollingArrow {
+@keyframes arrowBounce {
   0%, 100% {
-    transform: translateX(0) rotate(0deg);
+    transform: translateY(0);
   }
   50% {
-    transform: translateX(5px) rotate(180deg);
+    transform: translateY(4px);
   }
 }
 
@@ -430,11 +435,15 @@ footer {
     style="position:absolute;width:1px;height:1px;overflow:hidden;left:-9999px;">
   </div>
 
-  <h2 class="section-title">my favourites
-    <img src="letter.png" alt="open my favourite people"
-      class="title-icon" onclick="showPeople()">
-    <span class="letter-hint" aria-hidden="true">↻</span>
+  <h2 class="section-title">
+    my favourites
+    <span class="letter-wrap">
+      <img src="letter.png" alt="open my favourite people"
+        class="title-icon" onclick="showPeople()">
+      <span class="letter-arrow" aria-hidden="true">↙</span>
+    </span>
   </h2>
+
   <p class="section-note">click on a little charm to see a message ✧</p>
 
   <section class="interests">
@@ -614,6 +623,7 @@ const interests = [
 function showMessage(index) {
   const item = interests[index];
   document.getElementById("modal-image").src = item.image;
+  document.getElementById("modal-image").style.display = "";
   document.getElementById("modal-title").textContent = item.title;
   document.getElementById("modal-message").textContent = item.message;
   document.getElementById("interest-modal").classList.add("show");
