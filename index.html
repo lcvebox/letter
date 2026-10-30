@@ -71,10 +71,7 @@ header {
   padding: 24px;
   border-radius: 22px;
   border: 1px solid #f8cfe2;
-
-  /* Profile background image */
-  background-image:
-    url("background.jpg");
+  background-image: url("background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -190,7 +187,7 @@ header {
   margin: 32px 0 8px;
 }
 
-/* Small icon beside my favourites */
+/* Small clickable letter icon */
 .title-icon {
   width: 60px;
   height: 60px;
@@ -200,6 +197,32 @@ header {
   vertical-align: middle;
   display: inline-block;
   margin-left: -6px;
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+.title-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Tiny rolling pink arrow */
+.letter-hint {
+  display: inline-block;
+  color: #ee9cbd;
+  font-size: 13px;
+  margin-left: -5px;
+  vertical-align: middle;
+  animation: rollingArrow 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes rollingArrow {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(180deg);
+  }
 }
 
 .section-note {
@@ -394,7 +417,6 @@ footer {
       <p>she / her</p>
       <p>31 may</p>
       <p>pure and fragile heart . . </p>
-    
     </div>
   </section>
 
@@ -409,7 +431,9 @@ footer {
   </div>
 
   <h2 class="section-title">my favourites
-    <img src="letter.png" alt="" class="title-icon">
+    <img src="letter.png" alt="open my favourite people"
+      class="title-icon" onclick="showPeople()">
+    <span class="letter-hint" aria-hidden="true">↻</span>
   </h2>
   <p class="section-note">click on a little charm to see a message ✧</p>
 
@@ -595,8 +619,18 @@ function showMessage(index) {
   document.getElementById("interest-modal").classList.add("show");
 }
 
+/* Clickable letter popup */
+function showPeople() {
+  document.getElementById("modal-image").style.display = "none";
+  document.getElementById("modal-title").textContent = "my favs ppl ⁠♡";
+  document.getElementById("modal-message").textContent =
+    "xavier , alfie , lili , ayumii , féli , mono , fea , naomi , melie , yuni , michael , ivory , xin and yue";
+  document.getElementById("interest-modal").classList.add("show");
+}
+
 function hideMessage() {
   document.getElementById("interest-modal").classList.remove("show");
+  document.getElementById("modal-image").style.display = "";
 }
 
 function outsideClose(event) {
