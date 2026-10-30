@@ -105,6 +105,34 @@ header {
   font-size: 14px;
 }
 
+/* About me button */
+.about-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 0 0 8px;
+  padding: 5px 10px;
+  border: 1px solid #f3c5d8;
+  border-radius: 10px;
+  background: #fff7fa;
+  color: #bd7898;
+  font-family: Georgia, serif;
+  font-size: 12px;
+  transition: transform .2s, background .2s;
+}
+
+.about-button:hover {
+  transform: translateY(-2px);
+  background: #fff0f6;
+}
+
+.about-button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
 /* Full-screen falling glowing sparkles */
 .snow {
   position: fixed;
@@ -187,7 +215,7 @@ header {
   margin: 32px 0 8px;
 }
 
-/* Clickable letter and pink pointing arrow */
+/* Clickable letter */
 .letter-wrap {
   position: relative;
   display: inline-block;
@@ -208,26 +236,6 @@ header {
 
 .title-icon:hover {
   transform: scale(1.1);
-}
-
-.letter-arrow {
-  position: absolute;
-  top: -5px;
-  right: -8px;
-  color: #ee9cbd;
-  font-size: 17px;
-  line-height: 1;
-  animation: arrowBounce 1s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes arrowBounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(4px);
-  }
 }
 
 .section-note {
@@ -361,6 +369,37 @@ footer {
   margin: 0;
 }
 
+/* About me popup formatting */
+.modal-box.about-modal {
+  width: min(420px, 100%);
+  text-align: left;
+}
+
+.about-modal h3 {
+  text-align: center;
+}
+
+.about-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-size: 11px;
+  line-height: 1.8;
+  margin-bottom: 13px;
+}
+
+.about-info-title {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.about-info {
+  font-size: 13px;
+  line-height: 1.8;
+}
+
 .close {
   position: absolute;
   right: 13px;
@@ -393,6 +432,15 @@ footer {
     width: 92%;
     padding-top: 18px;
   }
+
+  .about-details {
+    gap: 6px;
+    font-size: 10px;
+  }
+
+  .about-info {
+    font-size: 12px;
+  }
 }
 </style>
 </head>
@@ -419,6 +467,12 @@ footer {
 
     <div class="profile-info">
       <h2><span id="typing-text"></span></h2>
+
+      <button class="about-button" onclick="showAboutMe()">
+        about me
+        <img src="bow2.png" alt="">
+      </button>
+
       <p>she / her</p>
       <p>31 may</p>
       <p>pure and fragile heart . . </p>
@@ -440,7 +494,6 @@ footer {
     <span class="letter-wrap">
       <img src="letter.png" alt="open my favourite people"
         class="title-icon" onclick="showPeople()">
-      
     </span>
   </h2>
 
@@ -527,7 +580,7 @@ footer {
   </footer>
 
 <div class="modal" id="interest-modal" onclick="outsideClose(event)">
-  <div class="modal-box">
+  <div class="modal-box" id="modal-box">
     <button class="close" onclick="hideMessage()" aria-label="Close">×</button>
     <img id="modal-image" src="" alt="">
     <h3 id="modal-title"></h3>
@@ -619,15 +672,48 @@ const interests = [
 
 function showMessage(index) {
   const item = interests[index];
-  document.getElementById("modal-image").src = item.image;
-  document.getElementById("modal-image").style.display = "";
+  const modalImage = document.getElementById("modal-image");
+  const modalBox = document.getElementById("modal-box");
+
+  modalBox.classList.remove("about-modal");
+  modalImage.src = item.image;
+  modalImage.style.display = "";
   document.getElementById("modal-title").textContent = item.title;
   document.getElementById("modal-message").textContent = item.message;
   document.getElementById("interest-modal").classList.add("show");
 }
 
+/* About me popup */
+function showAboutMe() {
+  const modalImage = document.getElementById("modal-image");
+  const modalBox = document.getElementById("modal-box");
+  const modalMessage = document.getElementById("modal-message");
+
+  modalImage.style.display = "none";
+  modalBox.classList.add("about-modal");
+
+  document.getElementById("modal-title").textContent = "about me ♡";
+
+  modalMessage.innerHTML = `
+    <div class="about-details">
+      <span>prns : she / her</span>
+      <span>mbti : isfj</span>
+      <span>bday : 31 may</span>
+    </div>
+
+    <div class="about-info-title">info :</div>
+
+    <div class="about-info">
+      just a pure soul with nothing but good intentions , hoping to spread kindness and sweetness wherever i go . usually quiet , mostly lurking , and a little awkward with conversations unless we’re familiar . i adore people with gentle words and warm hearts . please interact with care , i’m very sensitive overthinker . .
+    </div>
+  `;
+
+  document.getElementById("interest-modal").classList.add("show");
+}
+
 /* Clickable letter popup */
 function showPeople() {
+  document.getElementById("modal-box").classList.remove("about-modal");
   document.getElementById("modal-image").style.display = "none";
   document.getElementById("modal-title").textContent = "my favs ppl ⁠♡";
   document.getElementById("modal-message").textContent =
@@ -638,6 +724,7 @@ function showPeople() {
 function hideMessage() {
   document.getElementById("interest-modal").classList.remove("show");
   document.getElementById("modal-image").style.display = "";
+  document.getElementById("modal-box").classList.remove("about-modal");
 }
 
 function outsideClose(event) {
