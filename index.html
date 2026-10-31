@@ -375,11 +375,11 @@ footer {
 }
 
 .about-details {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
   justify-content: center;
-  align-items: center;
-  gap: 20px;
-  white-space: nowrap;
+  column-gap: 25px;
+  row-gap: 5px;
   font-size: 11px;
   line-height: 1.8;
   margin-bottom: 13px;
@@ -687,10 +687,11 @@ function showAboutMe() {
 
   modalMessage.innerHTML = `
     <div class="about-details">
-      <span>prns : she / her</span>
-      <span>mbti : isfj</span>
-      <span>bday : 31 may</span>
-    </div>
+  <span>prns : she / her</span>
+  <span>mbti : isfj</span>
+  <span>bday : 31 may</span>
+  <span>nat : thai - chinese</span>
+</div>
 
     <div class="about-info-title">info :</div>
 
