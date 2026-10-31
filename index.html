@@ -99,12 +99,17 @@ header {
   font-weight: normal;
 }
 
-/* About me button */
+/* Profile buttons */
+.profile-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .about-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0px;
   margin: 0 0 4px;
   padding: 8px 15px;
   border: 1px solid #f8cfe2;
@@ -122,9 +127,29 @@ header {
   background: #fff5fa;
 }
 
-.about-button img {
-  width: 42px;
-  height: 42px;
+.hobby-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 3px;
+  margin-bottom: 4px;
+  border: 1px solid #f8cfe2;
+  border-radius: 12px;
+  background: #ffffffd9;
+  box-shadow: 0 2px 7px #8f718010;
+  transition: transform .2s, background .2s;
+}
+
+.hobby-button:hover {
+  transform: translateY(-2px);
+  background: #fff5fa;
+}
+
+.hobby-button img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -157,16 +182,12 @@ header {
     transform: translate(0, -10px) scale(.5);
     opacity: 0;
   }
-  15% {
-    opacity: .9;
-  }
+  15% { opacity: .9; }
   50% {
     transform: translate(15px, 50vh) scale(1);
     opacity: .8;
   }
-  85% {
-    opacity: .7;
-  }
+  85% { opacity: .7; }
   100% {
     transform: translate(-10px, 105vh) scale(.5);
     opacity: 0;
@@ -395,6 +416,13 @@ footer {
   line-height: 1.8;
 }
 
+/* Hobbies popup */
+.hobby-list {
+  text-align: center;
+  font-size: 14px;
+  line-height: 2.2;
+}
+
 .close {
   position: absolute;
   right: 13px;
@@ -417,6 +445,10 @@ footer {
     margin: auto;
     width: 125px;
     height: 125px;
+  }
+
+  .profile-buttons {
+    justify-content: center;
   }
 
   .interests {
@@ -463,10 +495,17 @@ footer {
     <div class="profile-info">
       <h2><span id="typing-text"></span></h2>
 
-      <button class="about-button" onclick="showAboutMe()">
-        小さな愛
-        <img src="bow2.png" alt="">
-      </button>
+      <div class="profile-buttons">
+
+        <button class="about-button" onclick="showAboutMe()">
+          小さな愛
+        </button>
+
+        <button class="hobby-button" onclick="showHobbies()" aria-label="My hobbies">
+          <img src="bow2.png" alt="">
+        </button>
+
+      </div>
     </div>
   </section>
 
@@ -553,22 +592,24 @@ footer {
   </section>
 
   <nav class="socials">
-  <a class="social" href="https://www.roblox.com/users/2530078224/profile"
-    target="_blank" rel="noopener">
-    <img src="charms/book.png" alt="">
-    roblox
-  </a>
+    <a class="social" href="https://www.roblox.com/users/2530078224/profile"
+      target="_blank" rel="noopener">
+      <img src="charms/book.png" alt="">
+      roblox
+    </a>
 
-  <a class="social" href="https://discord.com/users/1459768880133308470"
-    target="_blank" rel="noopener">
-    <img src="charms/book.png" alt="">
-    discord
-  </a>
+    <a class="social" href="https://discord.com/users/1459768880133308470"
+      target="_blank" rel="noopener">
+      <img src="charms/book.png" alt="">
+      discord
+    </a>
   </nav>
 
   <footer>
-  made with ♡ by me
+    made with ♡ by me
   </footer>
+
+</main>
 
 <div class="modal" id="interest-modal" onclick="outsideClose(event)">
   <div class="modal-box" id="modal-box">
@@ -687,16 +728,44 @@ function showAboutMe() {
 
   modalMessage.innerHTML = `
     <div class="about-details">
-  <span>prns : she / her</span>
-  <span>mbti : isfj</span>
-  <span>bday : 31 may</span>
-  <span>nat : thai - chinese</span>
-</div>
+      <span>prns : she / her</span>
+      <span>mbti : isfj</span>
+      <span>bday : 31 may</span>
+      <span>nat : thai - chinese</span>
+    </div>
 
     <div class="about-info-title">info :</div>
 
     <div class="about-info">
       just a pure soul trying to be kind and spread a little sweetness wherever i go . usually quiet or lurking around , and not always the best at expressing myself or keeping conversations alive , even with familiar people , though i genuinely love talking with them . i have a soft and rather sensitive heart , tend to overthink even over the smallest things , so i deeply appreciate patience , gentle words , and thoughtful people (,,>   ̯  <｡)っ
+    </div>
+  `;
+
+  document.getElementById("interest-modal").classList.add("show");
+}
+
+/* Hobbies popup */
+function showHobbies() {
+  const modalImage = document.getElementById("modal-image");
+  const modalBox = document.getElementById("modal-box");
+  const modalMessage = document.getElementById("modal-message");
+
+  modalImage.style.display = "none";
+  modalBox.classList.remove("about-modal");
+
+  document.getElementById("modal-title").textContent = "little hobby ♡";
+
+  modalMessage.innerHTML = `
+    <div class="hobby-list">
+      writing<br>
+      reading<br>
+      cooking<br>
+      baking desserts<br>
+      decorating<br>
+      going to cafés<br>
+      doing my makeup<br>
+      browsing cute finds
+    </div>
   `;
 
   document.getElementById("interest-modal").classList.add("show");
